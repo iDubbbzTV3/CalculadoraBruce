@@ -9,6 +9,7 @@ import android.os.Bundle;
 
             String[] datos = new String[7];
 
+
             //Paso el String a un arreglo separando por los puntos
             String[] octetos = ip.split(java.util.regex.Pattern.quote("."));
 
@@ -19,6 +20,10 @@ import android.os.Bundle;
             int num4 = Integer.parseInt(octetos[3]);
 
             int subnet0 = Integer.parseInt(subnet);
+            int bitsdered = 32 - subnet0;
+            int bitsdehost = subnet0;
+            String bitsderedstring = Integer.toString(bitsdered);
+            String bitsdehoststring = Integer.toString(bitsdehost);
 
             int totalips = (int) (Math.pow(2, 32-subnet0)) ;
             int totalhosts = (int) (Math.pow(2, 32-subnet0)-2);
@@ -40,7 +45,7 @@ import android.os.Bundle;
             binaryString4 = binaryString4.substring(binaryString4.length() - 8);
 
             //Tomo las Strings y creo una unica String e.g(11111111111111110000000011111111)
-            String direccionIP = new String(binaryString1 + binaryString2 + binaryString3 + binaryString4);
+            String direccionIP = binaryString1 + binaryString2 + binaryString3 + binaryString4;
 
             //Convierto el String en un arreglo de caracteres
             char[] charArray = direccionIP.toCharArray();
@@ -70,18 +75,10 @@ import android.os.Bundle;
             char[] char3 = new char[8];
             char[] char4 = new char[8];
 
-            for (int i = 0; i < 8; i++){
-                char1[i] = charArray[i];
-            }
-            for (int i = 0; i < 8; i++){
-                char2[i] = charArray[i+8];
-            }
-            for (int i = 0; i < 8; i++){
-                char3[i] = charArray[i+16];
-            }
-            for (int i = 0; i < 8; i++){
-                char4[i] = charArray[i+24];
-            }
+            System.arraycopy(charArray, 0, char1, 0, 8);
+            System.arraycopy(charArray, 8, char2, 0, 8);
+            System.arraycopy(charArray, 16, char3, 0, 8);
+            System.arraycopy(charArray, 24, char4, 0, 8);
 
             //Parto el Array de 32 caracteres a 4 arrays de 8 caracteres (para agregarle el punto)
             char[] char5 = new char[8];
@@ -89,18 +86,10 @@ import android.os.Bundle;
             char[] char7 = new char[8];
             char[] char8 = new char[8];
 
-            for (int i = 0; i < 8; i++){
-                char5[i] = charArray2[i];
-            }
-            for (int i = 0; i < 8; i++){
-                char6[i] = charArray2[i+8];
-            }
-            for (int i = 0; i < 8; i++){
-                char7[i] = charArray2[i+16];
-            }
-            for (int i = 0; i < 8; i++){
-                char8[i] = charArray2[i+24];
-            }
+            System.arraycopy(charArray2, 0, char5, 0, 8);
+            System.arraycopy(charArray2, 8, char6, 0, 8);
+            System.arraycopy(charArray2, 16, char7, 0, 8);
+            System.arraycopy(charArray2, 24, char8, 0, 8);
 
             //Parto el Array de 32 caracteres a 4 arrays de 8 caracteres (para agregarle el punto)
             char[] char9 = new char[8];
@@ -108,18 +97,10 @@ import android.os.Bundle;
             char[] char11= new char[8];
             char[] char12 = new char[8];
 
-            for (int i = 0; i < 8; i++){
-                char9[i] = charArray3[i];
-            }
-            for (int i = 0; i < 8; i++){
-                char10[i] = charArray3[i+8];
-            }
-            for (int i = 0; i < 8; i++){
-                char11[i] = charArray3[i+16];
-            }
-            for (int i = 0; i < 8; i++){
-                char12[i] = charArray3[i+24];
-            }
+            System.arraycopy(charArray3, 0, char9, 0, 8);
+            System.arraycopy(charArray3, 8, char10, 0, 8);
+            System.arraycopy(charArray3, 16, char11, 0, 8);
+            System.arraycopy(charArray3, 24, char12, 0, 8);
 
             //Paso los arreglos de caracteres a Strings binarias
             String caracter1 = new String(char1);
@@ -135,7 +116,7 @@ import android.os.Bundle;
 
             //Ahora uno los arrays y les agrego punto entre medio
 
-            String direccionnet = new String(foo1+"."+foo2+"."+foo3+"."+foo4);
+            String direccionnet = foo1 + "." + foo2 + "." + foo3 + "." + foo4;
 
             //Paso los arreglos de caracteres a Strings binarias
             String caracter5 = new String(char5);
@@ -151,7 +132,7 @@ import android.os.Bundle;
 
             //Ahora uno los arrays y les agrego punto entre medio
 
-            String direccionmascara = new String(foo5 + "." + foo6 + "." + foo7 + "." + foo8);
+            String direccionmascara = foo5 + "." + foo6 + "." + foo7 + "." + foo8;
 
             //Paso los arreglos de caracteres a Strings binarias
             String caracter9 = new String(char9);
@@ -167,14 +148,16 @@ import android.os.Bundle;
 
             //Ahora uno los arrays y les agrego punto entre medio
 
-            String direccionbroadcast = new String(foo9 + "." + foo10 + "." + foo11 + "." + foo12);
+            String direccionbroadcast = foo9 + "." + foo10 + "." + foo11 + "." + foo12;
 
 
             datos[0] = Stotallips; //Cantidad de redes
             datos[1] = Stotalhosts; //Cantidad de hosts
             datos[2] = direccionnet; //Net ID
             datos[3] = direccionmascara; //Mascara de red
-
+            datos[4] = direccionbroadcast; //Broadcast
+            datos[5] = bitsdehoststring; // Bits de host
+            datos[6] = bitsderedstring; // Bits de red
 
             return datos;
         }
