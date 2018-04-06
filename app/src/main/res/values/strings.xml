@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CalculadoraIP</string>
+    <string name="net_mask">Net Mask</string>
+    <string name="total_ips">Total IPs</string>
+    <string name="subnet">Subnet</string>
+    <string name="net_bits">Net bits</string>
+    <string name="host_bits">Host bits</string>
+    <string name="hosts">Hosts</string>
+    <string name="_04">0</string>
+    <string name="_03">0</string>
+    <string name="_01">0</string>
+    <string name="_02">0</string>
+    <string name="ip_adress">IP adress</string>
+    <string name="net_id">Net ID</string>
+    <string name="broadcast">Broadcast</string>
+    <string name="calculate">Calculate</string>
+</resources>
